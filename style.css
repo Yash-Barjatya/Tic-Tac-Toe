@@ -1,0 +1,159 @@
+*,*::after,*::before{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;/*getting rid of all margin*/
+    
+}
+h1{
+    display: inline-block;
+    margin-left :40%;
+    font-size: 50px;
+    font-family: sans-serif;
+    color: gold;
+    background-color: black;
+    box-shadow: 0px 0px 5px 5px yellow;
+}
+.board{
+     margin-top:-10% ;
+    width: 100vw;/*vw= view width*/
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    
+    grid-template-columns: repeat(3,auto);/*so that it is 3x3 grid and not 9x1*/
+}
+.cell{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    border: 2px solid yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+   
+
+}/**to remove outside border*/
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9){
+    border-bottom: none;
+}
+.cell.cross::before,
+.cell.cross::after,
+.cell.circle::before
+{
+    background-color: yellow;
+}
+.cell.circle::after,
+.board.circle .cell:not(.cross):not(.circle):hover::after
+{
+    background-color: black; 
+}
+.board.cross .cell:not(.cross):not(.circle):hover::after,
+.board.cross .cell:not(.cross):not(.circle):hover::before,
+.board.circle .cell:not(.cross):not(.circle):hover::before
+{
+
+    background-color:rgb(75, 78, 44);
+}
+/*not selector to ensure that there is no effect when we hover over a preoccupied cell*/
+.cell.cross::before,
+.cell.cross::after,
+.board.cross .cell:not(.cross):not(.circle):hover::after,
+.board.cross .cell:not(.cross):not(.circle):hover::before{
+    content: '';
+   
+    width: 10px;
+    height: 80px;
+    position: absolute;
+}
+.cell.cross::before,
+.board.cross .cell:not(.cross):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+.cell.cross::after,
+.board.cross .cell:not(.cross):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.cross):not(.circle):hover::after,
+.board.circle .cell:not(.cross):not(.circle):hover::before{
+    content: '';
+    border-radius:50%;
+    position: absolute;
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.cross):not(.circle):hover::before
+{/*outer circle*/
+    width: 80px;
+    height: 80px;
+    
+}
+.cell.circle::after,
+.board.circle .cell:not(.cross):not(.circle):hover::after
+{/* inner circle*/
+    width: 60px;
+    height: 60px;
+    
+}
+.cell.cross,.cell.circle{
+    cursor: not-allowed;
+}
+.result{
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:rgba(0, 0,0,.9);/*0.1 transparent*/
+   
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+    color:gold;
+   
+    font-size: 80px;
+    font-family: sans-serif;
+
+}
+.result.show{
+    display: flex;/* when div class result is changed from result to result show only then will the result display be showm*/
+}
+.result button{
+    font-size: 70px;
+    background-color: yellow;
+    font-weight: bolder;
+    border-radius: 50%;
+    border: 5px solid gold;
+    
+}
+.result button:hover{
+    font-size: 70px;
+    color:yellow;
+    background-color: black;
+    font-weight: bolder;
+    border-radius: 50%;
+    border: 5px solid gold;
+    
+}
